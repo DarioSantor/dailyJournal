@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        let controller = MainViewController()
+        
+        // Add Navigation Controller
+        let controller = NotesViewController()
         let navController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navController
         

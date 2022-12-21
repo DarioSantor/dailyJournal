@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F250BAD12953065400099E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAD02953065400099E28 /* AppDelegate.swift */; };
-		F250BAD52953065400099E28 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAD42953065400099E28 /* MainViewController.swift */; };
+		F250BAD52953065400099E28 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAD42953065400099E28 /* NotesViewController.swift */; };
 		F250BADA2953065600099E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F250BAD92953065600099E28 /* Assets.xcassets */; };
 		F250BADD2953065600099E28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F250BADB2953065600099E28 /* LaunchScreen.storyboard */; };
+		F250BAE629531E7100099E28 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAE529531E7100099E28 /* AddNoteViewController.swift */; };
+		F250BAE82953501B00099E28 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAE72953501B00099E28 /* Note.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F250BACD2953065400099E28 /* Daily Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F250BAD02953065400099E28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F250BAD42953065400099E28 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F250BAD42953065400099E28 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		F250BAD92953065600099E28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F250BADC2953065600099E28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F250BADE2953065600099E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F250BAE529531E7100099E28 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		F250BAE72953501B00099E28 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +58,9 @@
 			children = (
 				F250BAE42953069C00099E28 /* Files */,
 				F250BAD02953065400099E28 /* AppDelegate.swift */,
-				F250BAD42953065400099E28 /* MainViewController.swift */,
+				F250BAD42953065400099E28 /* NotesViewController.swift */,
+				F250BAE529531E7100099E28 /* AddNoteViewController.swift */,
+				F250BAE72953501B00099E28 /* Note.swift */,
 			);
 			path = "Daily Journal";
 			sourceTree = "<group>";
@@ -139,8 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F250BAD52953065400099E28 /* MainViewController.swift in Sources */,
+				F250BAD52953065400099E28 /* NotesViewController.swift in Sources */,
+				F250BAE629531E7100099E28 /* AddNoteViewController.swift in Sources */,
 				F250BAD12953065400099E28 /* AppDelegate.swift in Sources */,
+				F250BAE82953501B00099E28 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
