@@ -8,13 +8,7 @@
 import Foundation
 import UIKit
 
-// Create the delegate protocol
-protocol AddNoteViewControllerDelegate {
-    func addNote(note: Note)
-}
-
 class AddNoteViewController: UIViewController {
-    var delegate: AddNoteViewControllerDelegate?
     
     var mainVC: NotesViewController?
     
