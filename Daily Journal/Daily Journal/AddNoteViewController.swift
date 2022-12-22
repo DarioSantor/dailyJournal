@@ -25,11 +25,19 @@ class AddNoteViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            let newNote = Note(context: context)
+            newNote.date = datePicker.date
+            newNote.text = noteText.text
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        }
+    }
 }
 
 extension AddNoteViewController {
     func setup() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(handleDelete))
         datePicker.becomeFirstResponder()
         style()
@@ -45,7 +53,7 @@ extension AddNoteViewController {
         noteText.translatesAutoresizingMaskIntoConstraints = false
         noteText.font = .preferredFont(forTextStyle: .body)
         noteText.layer.cornerRadius = 10
-        noteText.backgroundColor = .opaqueSeparator
+        noteText.backgroundColor = .quaternarySystemFill
     }
     
     func layout() {
@@ -67,15 +75,6 @@ extension AddNoteViewController {
 }
 
 // MARK: Actions
-extension AddNoteViewController {
-    @objc func handleDone(sender: UIButton) {
-        let newNote = Note()
-        newNote.date = datePicker.date
-        newNote.text = noteText.text
-        delegate?.addNote(note: newNote)
-    }
-}
-
 extension AddNoteViewController {
     @objc func handleDelete(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

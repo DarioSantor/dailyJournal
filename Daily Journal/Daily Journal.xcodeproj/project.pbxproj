@@ -12,7 +12,9 @@
 		F250BADA2953065600099E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F250BAD92953065600099E28 /* Assets.xcassets */; };
 		F250BADD2953065600099E28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F250BADB2953065600099E28 /* LaunchScreen.storyboard */; };
 		F250BAE629531E7100099E28 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAE529531E7100099E28 /* AddNoteViewController.swift */; };
-		F250BAE82953501B00099E28 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAE72953501B00099E28 /* Note.swift */; };
+		F250BAEE2954751300099E28 /* Daily_Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F250BAEC2954751300099E28 /* Daily_Journal.xcdatamodeld */; };
+		F250BAF12954770100099E28 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAEF2954770100099E28 /* Note+CoreDataClass.swift */; };
+		F250BAF22954770100099E28 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250BAF02954770100099E28 /* Note+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +25,9 @@
 		F250BADC2953065600099E28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F250BADE2953065600099E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F250BAE529531E7100099E28 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
-		F250BAE72953501B00099E28 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		F250BAED2954751300099E28 /* Daily_Journal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daily_Journal.xcdatamodel; sourceTree = "<group>"; };
+		F250BAEF2954770100099E28 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F250BAF02954770100099E28 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +60,13 @@
 		F250BACF2953065400099E28 /* Daily Journal */ = {
 			isa = PBXGroup;
 			children = (
-				F250BAE42953069C00099E28 /* Files */,
 				F250BAD02953065400099E28 /* AppDelegate.swift */,
 				F250BAD42953065400099E28 /* NotesViewController.swift */,
 				F250BAE529531E7100099E28 /* AddNoteViewController.swift */,
-				F250BAE72953501B00099E28 /* Note.swift */,
+				F250BAEF2954770100099E28 /* Note+CoreDataClass.swift */,
+				F250BAF02954770100099E28 /* Note+CoreDataProperties.swift */,
+				F250BAEC2954751300099E28 /* Daily_Journal.xcdatamodeld */,
+				F250BAE42953069C00099E28 /* Files */,
 			);
 			path = "Daily Journal";
 			sourceTree = "<group>";
@@ -146,9 +152,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F250BAD52953065400099E28 /* NotesViewController.swift in Sources */,
+				F250BAEE2954751300099E28 /* Daily_Journal.xcdatamodeld in Sources */,
+				F250BAF12954770100099E28 /* Note+CoreDataClass.swift in Sources */,
 				F250BAE629531E7100099E28 /* AddNoteViewController.swift in Sources */,
 				F250BAD12953065400099E28 /* AppDelegate.swift in Sources */,
-				F250BAE82953501B00099E28 /* Note.swift in Sources */,
+				F250BAF22954770100099E28 /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +362,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F250BAEC2954751300099E28 /* Daily_Journal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F250BAED2954751300099E28 /* Daily_Journal.xcdatamodel */,
+			);
+			currentVersion = F250BAED2954751300099E28 /* Daily_Journal.xcdatamodel */;
+			path = Daily_Journal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F250BAC52953065400099E28 /* Project object */;
 }

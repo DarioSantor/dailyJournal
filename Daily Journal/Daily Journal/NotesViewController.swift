@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class NotesViewController: UIViewController {
     var notes: [Note] = []
     var tableView = UITableView()
@@ -16,12 +14,20 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Daily Journal"
+        navigationItem.backButtonTitle = "Done"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleNewNote))
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.tableFooterView = UIView(frame: .zero)
+        setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let notesFromCoreData = try? context.fetch(Note.fetchRequest()) as? [Note] {
+                notes = notesFromCoreData
+                tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -30,7 +36,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 100
+        tableView.rowHeight = 30
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,7 +53,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = UITableViewCell()
+//        let note = notes[indexPath.row]
         cell.textLabel?.text = notes[indexPath.row].text
         return cell
     }
@@ -62,18 +70,6 @@ extension NotesViewController {
     @objc func handleNewNote() {
         
         let controller = AddNoteViewController()
-        controller.delegate = self
-        controller.modalPresentationStyle = .fullScreen
-        self.present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
-    }
-}
-
-// MARK: Add Note Delegate
-extension NotesViewController: AddNoteViewControllerDelegate {
-    func addNote(note: Note) {
-        self.dismiss(animated: true) {
-            self.notes.append(note)
-            self.tableView.reloadData()
-        }
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
