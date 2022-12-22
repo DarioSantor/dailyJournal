@@ -15,18 +15,30 @@ class AddNoteViewController: UIViewController {
     let datePicker = UIDatePicker()
     let noteText = UITextView()
     
+    var note: Note?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
+        if note == nil {
+            // Create
+        } else {
+            noteText.text = note!.text
+            if let dateToBeShown = note!.date {
+                datePicker.date = dateToBeShown}
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            let newNote = Note(context: context)
-            newNote.date = datePicker.date
-            newNote.text = noteText.text
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        if note == nil {
+            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                let newNote = Note(context: context)
+                newNote.date = datePicker.date
+                newNote.text = noteText.text
+            }
         }
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }
 

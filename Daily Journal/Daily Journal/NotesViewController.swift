@@ -62,6 +62,10 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO
+        let note = notes[indexPath.row]
+        let controller = AddNoteViewController()
+        controller.note = note
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 
