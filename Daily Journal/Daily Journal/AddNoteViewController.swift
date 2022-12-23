@@ -8,28 +8,30 @@
 import Foundation
 import UIKit
 
-class AddNoteViewController: UIViewController {
-    
+class AddNoteViewController: UIViewController, UITextViewDelegate {
+
     var mainVC: NotesViewController?
-    
+
     let datePicker = UIDatePicker()
     let noteText = UITextView()
-    
+
     var note: Note?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
-        if note == nil {
-            // Create
-        } else {
+
+        if note != nil {
             noteText.text = note!.text
             if let dateToBeShown = note!.date {
                 datePicker.date = dateToBeShown}
         }
+        
+        noteText.delegate = self
+        
+        datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         if note == nil {
             if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
@@ -40,7 +42,7 @@ class AddNoteViewController: UIViewController {
         }
         note?.date = datePicker.date
         note?.text = noteText.text
-        
+
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }
@@ -95,5 +97,15 @@ extension AddNoteViewController {
         let controller = NotesViewController()
         controller.tableView.reloadData()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        note?.text = textView.text
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+
+    @objc func handleDatePicker(_ datePicker: UIDatePicker) {
+        note?.date = datePicker.date
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }

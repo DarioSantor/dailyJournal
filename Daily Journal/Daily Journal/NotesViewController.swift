@@ -24,8 +24,10 @@ class NotesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             if let notesFromCoreData = try? context.fetch(Note.fetchRequest()) as? [Note] {
+                print("antes \(notes)")
                 notes = notesFromCoreData
                 tableView.reloadData()
+                print("depois \(notes)")
             }
         }
     }
