@@ -38,6 +38,9 @@ class AddNoteViewController: UIViewController {
                 newNote.text = noteText.text
             }
         }
+        note?.date = datePicker.date
+        note?.text = noteText.text
+        
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }
@@ -83,6 +86,14 @@ extension AddNoteViewController {
 // MARK: Actions
 extension AddNoteViewController {
     @objc func handleDelete(sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        if note != nil {
+            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                context.delete(note!)
+                try? context.save()
+            }
+        }
+        let controller = NotesViewController()
+        controller.tableView.reloadData()
+        self.navigationController?.popViewController(animated: true)
     }
 }
