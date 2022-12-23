@@ -36,9 +36,10 @@ class NotesViewController: UIViewController {
 extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     private func setupTableView() {
         view.addSubview(tableView)
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 30
+        tableView.rowHeight = 80
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -55,13 +56,12 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath)
         cell.textLabel?.text = notes[indexPath.row].text
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
         let note = notes[indexPath.row]
         let controller = AddNoteViewController()
         controller.note = note
