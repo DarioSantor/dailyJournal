@@ -56,9 +56,16 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = notes[indexPath.row].text
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell {
+            let note = notes[indexPath.row]
+            cell.previewView.text = note.text
+            cell.monthView.text = note.month()
+            cell.dayView.text = note.day()
+            
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
