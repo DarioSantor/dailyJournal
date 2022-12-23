@@ -8,45 +8,6 @@
 import Foundation
 import UIKit
 
-//class AddNoteViewController: UIViewController, UITextViewDelegate {
-//
-//    var mainVC: NotesViewController?
-//
-//    let datePicker = UIDatePicker()
-//    let noteText = UITextView()
-//
-//    var note: Note?
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setup()
-//
-//        if note != nil {
-//            noteText.text = note!.text
-//            if let dateToBeShown = note!.date {
-//                datePicker.date = dateToBeShown}
-//        }
-//
-//        noteText.delegate = self
-//
-//        datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        if note == nil {
-//            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-//                let newNote = Note(context: context)
-//                newNote.date = datePicker.date
-//                newNote.text = noteText.text
-//            }
-//        }
-//        note?.date = datePicker.date
-//        note?.text = noteText.text
-//
-//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-//    }
-//}
-
 class AddNoteViewController: UIViewController, UITextViewDelegate {
 
     var mainVC: NotesViewController?
@@ -58,6 +19,10 @@ class AddNoteViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         setup()
 
         if note == nil {
@@ -65,6 +30,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate {
                 note = Note(context: context)
                 note?.date = datePicker.date
                 note?.text = noteText.text
+                noteText.becomeFirstResponder()
             }
         }
         noteText.text = note?.text
@@ -84,7 +50,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate {
 extension AddNoteViewController {
     func setup() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(handleDelete))
-        datePicker.becomeFirstResponder()
         style()
         layout()
     }
@@ -141,5 +106,19 @@ extension AddNoteViewController {
     @objc func handleDatePicker(_ datePicker: UIDatePicker) {
         note?.date = datePicker.date
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
 }
