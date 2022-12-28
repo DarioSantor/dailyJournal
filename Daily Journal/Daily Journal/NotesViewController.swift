@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NotesViewController: UIViewController {
     var notes: [Note] = []
@@ -23,11 +24,13 @@ class NotesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            if let notesFromCoreData = try? context.fetch(Note.fetchRequest()) as? [Note] {
-                print("antes \(notes)")
+            
+            let request: NSFetchRequest<Note> = Note.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            
+            if let notesFromCoreData = try? context.fetch(request) {
                 notes = notesFromCoreData
                 tableView.reloadData()
-                print("depois \(notes)")
             }
         }
     }
